@@ -28,8 +28,9 @@ def main():
             count = 0
             generation += 1
             positions = game_utils.adjust_grid(positions)
+        pygame.display.set_caption(f'{GC.game_title}: Playing on generation: {generation}' if playing else f'{GC.game_title}: Paused on generation: {generation}')
+
             
-        pygame.display.set_caption(f'Playing on generation: {generation}' if playing else f'Paused on generation: {generation}')
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
                 running =  False
@@ -54,11 +55,13 @@ def main():
                         playing = False
                         count = 0
                         generation = 0
+                        pygame.display.set_caption(f'{GC.game_title}: Cleared board')
                     case pygame.K_r:
                         positions = game_utils.genPos(random.randrange(4, 10) * GC.GRID_WIDTH)
                         playing = False
                         count = 0
                         generation = 0
+                        pygame.display.set_caption(f'{GC.game_title}: Randomised board')
                     
         
         screen.fill(GC.Colours["GREY"])

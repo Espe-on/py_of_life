@@ -1,4 +1,5 @@
 class GAMECONSTANTS:
+    game_title = "Py_Of_Life"
     WIDTH, HEIGHT = 800, 800
     TILE_SIZE = 20
     GRID_WIDTH = WIDTH // TILE_SIZE
