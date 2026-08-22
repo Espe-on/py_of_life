@@ -14,6 +14,7 @@ def main():
     running = True
     playing = False
     count = 0
+    generation = 0
     
     positions = set()
 
@@ -25,9 +26,10 @@ def main():
         
         if count >= GC.update_frequency:
             count = 0
+            generation += 1
             positions = game_utils.adjust_grid(positions)
             
-        pygame.display.set_caption(f'Playing on count: {count}' if playing else f'Paused on count: {count}')
+        pygame.display.set_caption(f'Playing on generation: {generation}' if playing else f'Paused on generation: {generation}')
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
                 running =  False
@@ -51,10 +53,12 @@ def main():
                         positions = set()
                         playing = False
                         count = 0
+                        generation = 0
                     case pygame.K_r:
                         positions = game_utils.genPos(random.randrange(4, 10) * GC.GRID_WIDTH)
                         playing = False
                         count = 0
+                        generation = 0
                     
         
         screen.fill(GC.Colours["GREY"])
