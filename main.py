@@ -2,6 +2,7 @@ import pygame
 import random
 from gameconstants import GAMECONSTANTS as GC
 import game_utils
+import time
 
 pygame.init()
 
@@ -56,12 +57,14 @@ def main():
                         count = 0
                         generation = 0
                         pygame.display.set_caption(f'{GC.game_title}: Cleared board')
+                        time.sleep(GC.update_frequency*5)
                     case pygame.K_r:
                         positions = game_utils.genPos(random.randrange(4, 10) * GC.GRID_WIDTH)
                         playing = False
                         count = 0
                         generation = 0
                         pygame.display.set_caption(f'{GC.game_title}: Randomised board')
+                        time.sleep(GC.update_frequency*5)
                     
         
         screen.fill(GC.Colours["GREY"])
