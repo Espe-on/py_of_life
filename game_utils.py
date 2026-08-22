@@ -26,7 +26,7 @@ def adjust_grid(positions):
         neighbours = get_neighbours(position)
         all_neighbours.update(neighbours)
         
-        neighbours= list(filter(lambda c: c in positions, neighbours))
+        neighbours= list(filter(lambda c: c in positions, neighbours)) # filter the neighbours list based on if they're in the live positions passed to this functions
         
         if len(neighbours) in [2,3]:
             new_positions.add(position)
@@ -38,8 +38,22 @@ def adjust_grid(positions):
         
         if len(neighbours) == 3:
             new_positions.add(position)
+
     return new_positions
 
 
 def get_neighbours(position):
-    pass
+    # there are 8 neighbours to a given position (given here as a tuple), this will return a list of those neighbours
+    x, y = position
+    neighbours = []
+    for dx in [-1, 0 , 1]:
+        if x + dx < 0 or x + dx > GC.GRID_WIDTH: # picks up x values which are off the screen
+            continue
+        for dy in [-1, 0 , 1]:
+            if y + dy < 0 or y + dy > GC.GRID_HEIGHT: # picks up y values which are off the screen 
+                continue
+            if dx == 0 and dy == 0:
+                continue
+            
+            neighbours.append((x + dx , y + dy))
+    return neighbours
