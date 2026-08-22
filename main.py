@@ -13,11 +13,21 @@ clock = pygame.time.Clock()
 def main():
     running = True
     playing = False
+    count = 0
+    
     positions = set()
 
     while running: 
         clock.tick(GC.FPS)
-
+        
+        if playing:
+            count += 1
+        
+        if count >= GC.update_frequency:
+            count = 0
+            positions = game_utils.adjust_grid(positions)
+            
+        pygame.display.set_caption(f'Playing on count: {count}' if playing else f'Paused on count: {count}')
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
                 running =  False
@@ -40,8 +50,11 @@ def main():
                     case pygame.K_c:
                         positions = set()
                         playing = False
+                        count = 0
                     case pygame.K_r:
                         positions = game_utils.genPos(random.randrange(4, 10) * GC.GRID_WIDTH)
+                        playing = False
+                        count = 0
                     
         
         screen.fill(GC.Colours["GREY"])
